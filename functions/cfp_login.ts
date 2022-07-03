@@ -26,7 +26,7 @@ export async function onRequestPost(context: {
   } else {
     // Invalid password. Redirect to login page with error.
     return new Response('', {
-      status: 302,
+      status: 301,
       headers: {
         'Cache-Control': 'no-cache',
         Location: '/?error=1'
