@@ -3,7 +3,8 @@ clean:
 
 build: clean
 	mkdir _build
-	cp public/* _build/
+	cd site; hugo
+	cp -r site/public/* _build/
 	cp functions/* _build/
 
 deploy: build

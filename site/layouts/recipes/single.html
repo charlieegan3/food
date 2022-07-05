@@ -1,0 +1,26 @@
+{{ define "main" }}
+
+<h1>{{ .Params.title }}</h1>
+
+<p>{{ .Params.description }}</p>
+
+{{ range $i, $_ := (seq 0 (add .Params.images -1)) }}
+<div class="aspect-ratio aspect-ratio--8x5">
+  <div class="aspect-ratio--object cover" style="background:url(./images/{{ . }}.jpg) center;"></div>
+</div>
+{{ end }}
+
+<h2>Ingredients</h2>
+
+<p>Serves {{ .Params.yield }}</p>
+
+{{ .Params.ingredients | markdownify }}
+
+<h2>Instructions</h2>
+{{ .Params.instructions | markdownify }}
+
+{{ if .Params.notes }}
+<h2>Notes</h2>
+{{ .Params.notes | markdownify }}
+{{ end }}
+{{ end }}

@@ -1,1 +1,6 @@
 _build
+*.melarecipes
+.hugo_build.lock
+site/public
+site/content/recipes/**/*.md
+site/content/recipes/**/*.jpg

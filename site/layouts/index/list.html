@@ -1,0 +1,23 @@
+{{ define "main" }}
+<h1>{{.Title}}</h1>
+
+<article>
+    <div class="cf pa2">
+{{ range (where .Site.RegularPages.ByTitle "Section" "recipes" ) }}
+        <div class="fl w-third w-25-ns pa1 pa2-ns">
+            <a href="{{ .Permalink }}" class="db link tc">
+                <div class="aspect-ratio aspect-ratio--1x1">
+                    <div class="aspect-ratio--object cover" style="background:url({{ .Permalink }}/images/0.jpg) center;"></div>
+                </div>
+                <dl class="mt2 f7 lh-copy">
+                    <dt class="clip">Title</dt>
+                    <dd class="ml0 black truncate w-100 center">{{ .Title }}</dd>
+                </dl>
+            </a>
+        </div>
+{{ end }}
+    </div>
+</article>
+
+{{ .Content }}
+{{ end }}
