@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-<h1>{{ .Params.title }}</h1>
+<h1 class="bb pb2 bw2 b--orange">{{ .Params.title }}</h1>
 
 <p>{{ .Params.description }}</p>
 
@@ -23,4 +23,5 @@
 <h2>Notes</h2>
 {{ .Params.notes | markdownify }}
 {{ end }}
+<p> <a href="/">View all recipes</a> </p>
 {{ end }}
