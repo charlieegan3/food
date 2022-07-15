@@ -1,4 +1,4 @@
-export function getTemplate({ withError }: { withError: boolean }): string {
+export function getTemplate({ withError, url }: { withError: boolean, url: string }): string {
   return `
   <!doctype html>
   <html lang="en" data-theme="dark">
@@ -42,6 +42,7 @@ export function getTemplate({ withError }: { withError: boolean }): string {
           </hgroup>
           ${withError ? `<p class="error">Incorrect password, please try again.</p>` : ''}
           <form method="post" action="/cfp_login">
+            <input type="hidden" name="url" value="${url}">
             <input type="password" name="password" placeholder="Password" aria-label="Password" autocomplete="current-password" required autofocus>
             <button type="submit" class="contrast">Login</button>
           </form>
