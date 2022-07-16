@@ -1,3 +1,4 @@
+dist
 _build
 *.melarecipes
 .hugo_build.lock
