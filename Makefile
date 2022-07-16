@@ -8,4 +8,4 @@ build: clean
 	cp functions/* _build/
 
 deploy: build
-	CLOUDFLARE_ACCOUNT_ID=${CLOUDFLARE_ACCOUNT_ID} wrangler pages publish ./_build
+	wrangler pages publish ./_build --project-name=charlieegan3-food

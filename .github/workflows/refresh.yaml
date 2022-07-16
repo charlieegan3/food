@@ -1,0 +1,60 @@
+name: Refresh
+
+on:
+  repository_dispatch: {}
+  workflow_dispatch: {}
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download generation tool
+        uses: charlieegan3/fetch-gh-release-binary@main
+        with:
+          owner: charlieegan3
+          repo: food
+          asset-pattern: Linux_x86_64
+          install-path: /usr/local/bin/food
+          verbose: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dropbox cli
+        env:
+          DROPBOX_CLI_AUTH_JSON: ${{ secrets.DROPBOX_CLI_AUTH_JSON }}
+        run: |
+          mkdir -p ~/.config/dbxcli/
+          echo "$DROPBOX_CLI_AUTH_JSON" | base64 -d > ~/.config/dbxcli/auth.json
+          curl -LO https://github.com/dropbox/dbxcli/releases/download/v3.0.0/dbxcli-linux-amd64
+          chmod +x dbxcli-linux-amd64
+          mv dbxcli-linux-amd64 /usr/local/bin/dbxcli
+
+      - name: install hugo
+        run: |
+          curl -LO https://github.com/gohugoio/hugo/releases/download/v0.101.0/hugo_0.101.0_Linux-64bit.tar.gz
+          tar -xvf hugo_0.101.0_Linux-64bit.tar.gz
+          mv hugo /usr/local/bin/hugo
+
+      - name: install wrangler
+        run: |
+          npm install -g wrangler
+
+      - name: fetch repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: download recipe data
+        run: |
+          dbxcli get /Apps/Mela/Recipes.melarecipes
+
+      - name: generate the hugo site
+        run: |
+          food generate
+
+      - name: deploy the site
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: |
+          make deploy
