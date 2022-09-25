@@ -1,7 +1,8 @@
 name: Refresh
 
 on:
-  repository_dispatch: {}
+  schedule:
+  - cron: "15 17 * * *"
   workflow_dispatch: {}
 jobs:
   refresh:
