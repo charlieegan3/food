@@ -83,6 +83,7 @@ func (f *Food) Jobs() ([]apis.Job, error) {
 		},
 	}, nil
 }
+func (f *Food) ExternalJobsFuncSet(fun func(job apis.ExternalJob) error) {}
 
 func (f *Food) DatabaseMigrations() (*embed.FS, string, error) {
 	return &foodDatabaseMigrations, "migrations", nil
