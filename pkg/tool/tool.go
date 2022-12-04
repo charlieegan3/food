@@ -93,4 +93,5 @@ func (f *Food) DatabaseSet(db *sql.DB) {
 }
 
 func (f *Food) HTTPPath() string                    { return "" }
+func (f *Food) HTTPHost() string                    { return "" }
 func (f *Food) HTTPAttach(router *mux.Router) error { return nil }
