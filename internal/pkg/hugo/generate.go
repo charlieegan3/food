@@ -3,10 +3,11 @@ package hugo
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/charlieegan3/food/internal/pkg/markdown"
-	"github.com/charlieegan3/food/internal/pkg/recipes"
 	"io/ioutil"
 	"os"
+
+	"github.com/charlieegan3/food/internal/pkg/markdown"
+	"github.com/charlieegan3/food/internal/pkg/recipes"
 )
 
 func Generate(siteBasePath string, rs []recipes.Recipe) error {

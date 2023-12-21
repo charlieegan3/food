@@ -1,11 +1,13 @@
 package cmd
 
 import (
-	"github.com/charlieegan3/food/internal/pkg/hugo"
-	"github.com/charlieegan3/food/internal/pkg/recipes"
-	"github.com/spf13/cobra"
 	"io/ioutil"
 	"log"
+
+	"github.com/spf13/cobra"
+
+	"github.com/charlieegan3/food/internal/pkg/hugo"
+	"github.com/charlieegan3/food/internal/pkg/recipes"
 )
 
 var generateCmd = &cobra.Command{
